@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the content of the activity to use the activity_main.xml layout file
 
-    public void openNumbersList(View view) {
+    public void runNumbersAct(View view) {
         Intent intent = new Intent(this, NumbersActivity.class);
         startActivity(intent);
         }
