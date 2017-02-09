@@ -21,25 +21,27 @@ public class NumbersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_numbers);
 
         //create ArrayList for words
-        ArrayList<String> words = new ArrayList<String>();
+        ArrayList<Word> words = new ArrayList<>();
 
         //add values to ArrayList
-        words.add("One");
-        words.add("Two");
-        words.add("Three");
-        words.add("Four");
-        words.add("Five");
-        words.add("Six");
-        words.add("Seven");
-        words.add("Eight");
+        words.add(new Word ("Lutti","One"));
+        words.add(new Word ("Otiiko", "Two"));
+        words.add(new Word ("Tolookosu","Three"));
+        words.add(new Word ("Oyyisa","Four"));
+        words.add(new Word ("Massokka","Five"));
+        words.add(new Word ("Temmokka","Six"));
+        words.add(new Word ("Kenekaku","Seven"));
+        words.add(new Word ("Kawinta","Eight"));
+        words.add(new Word ("Wo'e","Nine"));
+        words.add(new Word ("Na'aacha","Ten"));
 
         //create Array adapter to populate ListView
-        //ArrayAdapter<String> wordsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, words);
+        WordAdapter adapter = new WordAdapter(this, words);
 
         //link listView from XML to local variable
         ListView listView = (ListView) findViewById(R.id.listView);
 
         //set array adapter to listView
-        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, words));
+        listView.setAdapter(adapter);
     }
 }
