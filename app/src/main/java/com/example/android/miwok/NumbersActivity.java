@@ -3,7 +3,10 @@ package com.example.android.miwok;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -23,16 +26,20 @@ public class NumbersActivity extends AppCompatActivity {
         //add values to ArrayList
         words.add("One");
         words.add("Two");
+        words.add("Three");
+        words.add("Four");
+        words.add("Five");
+        words.add("Six");
+        words.add("Seven");
+        words.add("Eight");
 
-        //set Linear Layout to variable
-        LinearLayout wordLayout = (LinearLayout) findViewById(R.id.activity_numbers);
+        //create Array adapter to populate ListView
+        //ArrayAdapter<String> wordsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, words);
 
-        TextView number0 = new TextView(this);
-        number0.setText(words.get(0));
-        wordLayout.addView(number0);
+        //link listView from XML to local variable
+        ListView listView = (ListView) findViewById(R.id.listView);
 
-        TextView number1 = new TextView(this);
-        number1.setText(words.get(1));
-        wordLayout.addView(number1);
+        //set array adapter to listView
+        listView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, words));
     }
 }
