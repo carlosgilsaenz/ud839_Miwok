@@ -17,16 +17,16 @@ public class NumbersActivity extends AppCompatActivity {
         ArrayList<Word> words = new ArrayList<>();
 
         //add values to ArrayList
-        words.add(new Word ("Lutti","One"));
-        words.add(new Word ("Otiiko", "Two"));
-        words.add(new Word ("Tolookosu","Three"));
-        words.add(new Word ("Oyyisa","Four"));
-        words.add(new Word ("Massokka","Five"));
-        words.add(new Word ("Temmokka","Six"));
-        words.add(new Word ("Kenekaku","Seven"));
-        words.add(new Word ("Kawinta","Eight"));
-        words.add(new Word ("Wo'e","Nine"));
-        words.add(new Word ("Na'aacha","Ten"));
+        words.add(new Word ("Lutti","One", R.drawable.number_one));
+        words.add(new Word ("Otiiko", "Two", R.drawable.number_two));
+        words.add(new Word ("Tolookosu","Three", R.drawable.number_three));
+        words.add(new Word ("Oyyisa","Four", R.drawable.number_four));
+        words.add(new Word ("Massokka","Five", R.drawable.number_five));
+        words.add(new Word ("Temmokka","Six", R.drawable.number_six));
+        words.add(new Word ("Kenekaku","Seven", R.drawable.number_seven));
+        words.add(new Word ("Kawinta","Eight", R.drawable.number_eight));
+        words.add(new Word ("Wo'e","Nine", R.drawable.number_nine));
+        words.add(new Word ("Na'aacha","Ten", R.drawable.number_ten));
 
         //create Array adapter to populate ListView
         WordAdapter adapter = new WordAdapter(this, words);
