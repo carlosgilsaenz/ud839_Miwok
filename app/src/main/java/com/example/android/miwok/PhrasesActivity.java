@@ -29,7 +29,7 @@ public class PhrasesActivity extends AppCompatActivity {
         words.add(new Word ("yoowutis","Come here."));
 
         //create Array adapter to populate ListView
-        WordAdapter adapter = new WordAdapter(this, words);
+        WordAdapter adapter = new WordAdapter(this, words, R.color.category_phrases);
 
         //link listView from XML to local variable
         ListView listView = (ListView) findViewById(R.id.listView);

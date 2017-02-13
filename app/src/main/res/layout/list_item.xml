@@ -2,33 +2,33 @@
 <!-- Layout -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/tan_background">
 
     <ImageView
         android:id="@+id/miwok_ImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
+        android:layout_width="@dimen/list_Margin"
+        android:layout_height="@dimen/list_Margin"
         tools:src="@drawable/number_one" />
 
     <LinearLayout
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="@dimen/list_Margin"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/miwok_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Lutti" />
+            android:textStyle="bold"
+            tools:text="Lutti"
+            style="@style/ListStyle"
+            android:gravity="bottom" />
 
         <TextView
             android:id="@+id/default_TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ListStyle"
             tools:text="One" />
 
 

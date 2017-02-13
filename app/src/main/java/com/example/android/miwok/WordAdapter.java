@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
  */
 
 public class WordAdapter extends ArrayAdapter<Word> {
+    //Global variable to set background color for text views
+    int mBackgroundColor = -1;
 
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
@@ -24,14 +27,15 @@ public class WordAdapter extends ArrayAdapter<Word> {
      * @param context        The current context. Used to inflate the layout file.
      * @param MiwokWords     A List of Miwok objects to display in a list
      */
-    public WordAdapter(Activity context, ArrayList<Word> MiwokWords) {
+    public WordAdapter(Activity context, ArrayList<Word> MiwokWords, int backgroundID) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
         // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, MiwokWords);
+        //set global variable to background ref ID
+        mBackgroundColor = backgroundID;
     }
-
     /**
      * Provides a view for an AdapterView (ListView, GridView, etc.)
      *
@@ -52,6 +56,11 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         // Get the {@link AndroidFlavor} object located at this position in the list
         Word currentWord = getItem(position);
+
+        //Find linear layout that contain text
+        //Set background color
+        LinearLayout linearlayout = (LinearLayout) listItemView.findViewById(R.id.listView);
+        linearlayout.setBackgroundResource(mBackgroundColor);
 
         // Find the TextView in the list_item.xml layout with the ID version_name
         TextView miwokTextView = (TextView) listItemView.findViewById(R.id.miwok_TextView);
@@ -75,6 +84,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
             imageView.setImageResource(currentWord.getImage());
 
+            //sets image to visible if image is provided
             imageView.setVisibility(View.VISIBLE);
         } else{imageView.setVisibility(View.GONE);}
 
