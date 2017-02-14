@@ -13,6 +13,8 @@ public class Word {
 
     private String mDefaultTranslation;
 
+    private int mSoundRecourceID;
+
     private int mImageResourceID = NO_IMAGE;
 
     /**
@@ -21,9 +23,10 @@ public class Word {
      * @param miwokWord   Miwok word to learn
      * @param defaultWord default word that translate the Miwork word
      */
-    public Word(String miwokWord, String defaultWord) {
+    public Word(String miwokWord, String defaultWord, int sound) {
         mMiwokTranslation = miwokWord;
         mDefaultTranslation = defaultWord;
+        mSoundRecourceID = sound;
     }
 
     /**
@@ -33,10 +36,11 @@ public class Word {
      * @param defaultWord default word that translate the Miwork word
      * @param drawable    Picture of MiWok word for visual reference
      */
-    public Word(String miwokWord, String defaultWord, int drawable) {
+    public Word(String miwokWord, String defaultWord, int drawable, int sound) {
         mMiwokTranslation = miwokWord;
         mDefaultTranslation = defaultWord;
         mImageResourceID = drawable;
+        mSoundRecourceID = sound;
     }
 
     /**
@@ -67,4 +71,11 @@ public class Word {
     public boolean hasImage() {
         return mImageResourceID != NO_IMAGE;
     }
+
+    /**
+     *
+     * @return sound reference
+     */
+    public int getSound(){ return mSoundRecourceID;}
 }
+
