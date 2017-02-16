@@ -4,6 +4,8 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +24,10 @@ import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
 import static android.media.AudioManager.STREAM_MUSIC;
 
 /**
- * Created by csaenz on 2/14/2017.
+ * Created by csaenz on 2/15/2017.
  */
 
-public class NumbersFragment extends android.support.v4.app.Fragment {
+public class ColorsFragment extends Fragment{
 
     MediaPlayer mMediaPlayer;
 
@@ -35,57 +37,58 @@ public class NumbersFragment extends android.support.v4.app.Fragment {
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
-            releaseMediaPlayer();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
         }
     };
+
     //setting onAudioChangeListener
     AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
             if(focusChange == AUDIOFOCUS_GAIN || focusChange == AUDIOFOCUS_GAIN_TRANSIENT || focusChange == AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK){
                 mMediaPlayer.start();
+                mMediaPlayer.seekTo(0);
             }
-            else if(focusChange == AUDIOFOCUS_LOSS || focusChange == AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+            else if(focusChange == AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
+                mMediaPlayer.pause();
+            }
+            else if(focusChange == AUDIOFOCUS_LOSS){
                 releaseMediaPlayer();
             }
-
         }
     };
 
-    public NumbersFragment(){
-
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //inflate ListView onto fragment
         View rootView = inflater.inflate(R.layout.words_list, container, false);
 
         //Initialize AudioManager to get system Service
         mAudioManager = (AudioManager)getActivity().getSystemService(Context.AUDIO_SERVICE);
 
-
         //create ArrayList for words
         final ArrayList<Word> words = new ArrayList<>();
 
         //add values to ArrayList
-        words.add(new Word ("Lutti","One", R.drawable.number_one, R.raw.number_one));
-        words.add(new Word ("Otiiko", "Two", R.drawable.number_two, R.raw.number_two));
-        words.add(new Word ("Tolookosu","Three", R.drawable.number_three, R.raw.number_three));
-        words.add(new Word ("Oyyisa","Four", R.drawable.number_four, R.raw.number_four));
-        words.add(new Word ("Massokka","Five", R.drawable.number_five, R.raw.number_five));
-        words.add(new Word ("Temmokka","Six", R.drawable.number_six, R.raw.number_six));
-        words.add(new Word ("Kenekaku","Seven", R.drawable.number_seven, R.raw.number_seven));
-        words.add(new Word ("Kawinta","Eight", R.drawable.number_eight, R.raw.number_eight));
-        words.add(new Word ("Wo'e","Nine", R.drawable.number_nine, R.raw.number_nine));
-        words.add(new Word ("Na'aacha","Ten", R.drawable.number_ten, R.raw.number_ten));
+        words.add(new Word ("Weṭeṭṭi","red", R.drawable.color_red, R.raw.color_red));
+        words.add(new Word ("Chokokki", "green", R.drawable.color_green, R.raw.color_green));
+        words.add(new Word ("Takaakki","brown", R.drawable.color_brown, R.raw.color_brown));
+        words.add(new Word ("Topoppi","gray", R.drawable.color_gray, R.raw.color_gray));
+        words.add(new Word ("Kululli","black", R.drawable.color_black, R.raw.color_black));
+        words.add(new Word ("Kelelli","white", R.drawable.color_white, R.raw.color_white));
+        words.add(new Word ("Topiisә", "dusty yellow", R.drawable.color_dusty_yellow,
+                R.raw.color_dusty_yellow));
+        words.add(new Word ("Chiwiiṭә","mustard yellow", R.drawable.color_mustard_yellow,
+                R.raw.color_mustard_yellow));
 
         //create Array adapter to populate ListView
-        WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_numbers);
+        WordAdapter adapter = new WordAdapter(getActivity(), words, R.color.category_colors);
 
         //link listView from XML to local variable
-        final ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+
         //set array adapter to listView
         listView.setAdapter(adapter);
 
@@ -116,18 +119,19 @@ public class NumbersFragment extends android.support.v4.app.Fragment {
                             Toast.LENGTH_SHORT).show();}
             }
         });
-
         return rootView;
     }
 
     /**
-     * clean up media player resources on Stop
+     * customer onStop to improve resource usage
      */
     @Override
     public void onStop() {
         super.onStop();
-
+        //ensure media player is released
         releaseMediaPlayer();
+        //release OnAudioChangeListener
+        mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
     }
 
     /**
@@ -146,4 +150,5 @@ public class NumbersFragment extends android.support.v4.app.Fragment {
             mMediaPlayer = null;
         }
     }
+
 }
