@@ -1,12 +1,9 @@
 package com.example.android.miwok;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
-import java.util.ArrayList;
 
 /**
  * Created by csaenz on 2/14/2017.
@@ -14,7 +11,7 @@ import java.util.ArrayList;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     private static final int NUM_ITEMS = 4;
-    private LayoutInflater mInflator;
+    Context context;
 
     public FragmentAdapter(FragmentManager fm) {
         super(fm);
@@ -40,5 +37,23 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return NUM_ITEMS;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+
+        switch (position){
+            case 0:
+                
+                return Integer.toString(position);
+            case 1:
+                return Integer.toString(position);
+            case 2:
+                return Integer.toString(position);
+            case 3:
+                return Integer.toString(position);
+            default:
+                return null;
+        }
     }
 }
