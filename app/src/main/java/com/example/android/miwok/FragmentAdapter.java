@@ -11,10 +11,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class FragmentAdapter extends FragmentPagerAdapter {
     private static final int NUM_ITEMS = 4;
-    Context context;
+    Context mContext;
 
-    public FragmentAdapter(FragmentManager fm) {
+    public FragmentAdapter(Context context, FragmentManager fm) {
         super(fm);
+        mContext = context;
     }
 
 
@@ -44,14 +45,13 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                
-                return Integer.toString(position);
+                return mContext.getString(R.string.category_numbers);
             case 1:
-                return Integer.toString(position);
+                return mContext.getString(R.string.category_colors);
             case 2:
-                return Integer.toString(position);
+                return mContext.getString(R.string.category_family);
             case 3:
-                return Integer.toString(position);
+                return mContext.getString(R.string.category_phrases);
             default:
                 return null;
         }

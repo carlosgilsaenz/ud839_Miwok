@@ -37,8 +37,7 @@ public class ColorsFragment extends Fragment{
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
-            mMediaPlayer.release();
-            mMediaPlayer = null;
+            releaseMediaPlayer();
         }
     };
 
@@ -47,15 +46,12 @@ public class ColorsFragment extends Fragment{
         @Override
         public void onAudioFocusChange(int focusChange) {
             if(focusChange == AUDIOFOCUS_GAIN || focusChange == AUDIOFOCUS_GAIN_TRANSIENT || focusChange == AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK){
-                mMediaPlayer.start();
-                mMediaPlayer.seekTo(0);
+                if (mMediaPlayer != null){mMediaPlayer.start();}
             }
-            else if(focusChange == AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
-                mMediaPlayer.pause();
-            }
-            else if(focusChange == AUDIOFOCUS_LOSS){
+            else if(focusChange == AUDIOFOCUS_LOSS || focusChange == AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
                 releaseMediaPlayer();
             }
+
         }
     };
 

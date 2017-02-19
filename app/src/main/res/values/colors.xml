@@ -34,4 +34,10 @@
 
     <!-- Background color for the phrases category -->
     <color name="category_phrases">#16AFCA</color>
+
+    <!-- White for Selected Tab layout item -->
+    <color name="tab_white">#FFFFFF</color>
+
+    <!-- Transparent white for unselected Tab layout -->
+    <color name="tab_off_white">#A8A19E</color>
 </resources>

@@ -38,12 +38,13 @@ public class NumbersFragment extends android.support.v4.app.Fragment {
             releaseMediaPlayer();
         }
     };
+
     //setting onAudioChangeListener
     AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
         @Override
         public void onAudioFocusChange(int focusChange) {
             if(focusChange == AUDIOFOCUS_GAIN || focusChange == AUDIOFOCUS_GAIN_TRANSIENT || focusChange == AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK){
-                mMediaPlayer.start();
+                if (mMediaPlayer != null){mMediaPlayer.start();}
             }
             else if(focusChange == AUDIOFOCUS_LOSS || focusChange == AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK){
                 releaseMediaPlayer();
